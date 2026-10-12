@@ -5,9 +5,18 @@ import { execFileSync } from 'node:child_process';
 import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { existsSync, readFileSync } from 'node:fs';
 const main = 'a'.repeat(40), live = 'b'.repeat(40);
 const good = { id: 1, name: 'ci', head_sha: main, app: { slug: 'github-actions' },
   status: 'completed', conclusion: 'success' };
+test('Actions repository identity matches the deployed policy', () => {
+  const path = new URL('./policy.json', import.meta.url);
+  if (process.env.GITHUB_REPOSITORY && existsSync(path)) {
+    const policy = JSON.parse(readFileSync(path, 'utf8'));
+    assert.equal(policy.repository, process.env.GITHUB_REPOSITORY);
+    assert.ok(policy.requiredChecks.includes('release-policy'));
+  }
+});
 test('Denver calendar dates honor midnight and DST', () => {
   assert.equal(denverDay(new Date('2026-10-12T05:59:59Z')), '2026-10-11');
   assert.equal(denverDay(new Date('2026-10-12T06:00:00Z')), '2026-10-12');

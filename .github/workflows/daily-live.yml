@@ -3,6 +3,7 @@ on:
   schedule:
     - cron: '23 10 * * *' # 04:23 Denver daylight / 03:23 standard; GitHub may delay.
   pull_request:
+    types: [opened, synchronize, reopened, edited]
   push:
     branches: [main]
 
