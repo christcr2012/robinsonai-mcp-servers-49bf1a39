@@ -10,26 +10,39 @@
     {
       "src": "/api/search",
       "dest": "/api/search.ts",
-      "methods": ["POST"]
+      "methods": [
+        "POST"
+      ]
     },
     {
       "src": "/api/crawl",
       "dest": "/api/crawl.ts",
-      "methods": ["POST"]
+      "methods": [
+        "POST"
+      ]
     },
     {
       "src": "/api/status",
       "dest": "/api/status.ts",
-      "methods": ["GET"]
+      "methods": [
+        "GET"
+      ]
     },
     {
       "src": "/api/stats",
       "dest": "/api/stats.ts",
-      "methods": ["GET"]
+      "methods": [
+        "GET"
+      ]
     }
   ],
   "env": {
     "NEON_DATABASE_URL": "@neon-database-url"
+  },
+  "git": {
+    "deploymentEnabled": {
+      "**": false,
+      "live": true
+    }
   }
 }
-
