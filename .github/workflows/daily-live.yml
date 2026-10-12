@@ -26,6 +26,7 @@ jobs:
         run: test "$BASE_BRANCH" = main
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
+          sparse-checkout: .github
           persist-credentials: false
       - run: node --test .github/release/promote-live.test.mjs
 
@@ -42,6 +43,7 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           ref: main
+          sparse-checkout: .github
           fetch-depth: 0
       - name: Checked daily fast-forward only
         env:
